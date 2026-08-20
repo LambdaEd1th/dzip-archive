@@ -12,7 +12,7 @@ The crate is not published on crates.io. Pin a release tag from GitHub:
 
 ```toml
 [dependencies]
-dzip = { git = "https://github.com/LambdaEd1th/dzip-core.git", tag = "v0.5.0" }
+dzip = { git = "https://github.com/LambdaEd1th/dzip-core.git", tag = "v0.5.1" }
 ```
 
 ## Read an archive
