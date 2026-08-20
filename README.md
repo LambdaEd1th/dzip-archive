@@ -1,10 +1,10 @@
 # dzip
 
-[![Core CI](https://github.com/LambdaEd1th/dzip-core/actions/workflows/ci.yml/badge.svg)](https://github.com/LambdaEd1th/dzip-core/actions/workflows/ci.yml)
+[![Core CI](https://github.com/LambdaEd1th/dzip-archive/actions/workflows/ci.yml/badge.svg)](https://github.com/LambdaEd1th/dzip-archive/actions/workflows/ci.yml)
 
 A pure-Rust library for reading, extracting, creating, and inspecting Dzip archives. The DZ, Zlib, Bzip, and LZMA engines are integrated into this crate, so consumers only need one dependency.
 
-The command-line and graphical applications live in [dzip-rs](https://github.com/LambdaEd1th/dzip-rs).
+The command-line and graphical applications live in [dzip-tools](https://github.com/LambdaEd1th/dzip-tools).
 
 ## Add the library
 
@@ -12,7 +12,7 @@ The crate is not published on crates.io. Pin a release tag from GitHub:
 
 ```toml
 [dependencies]
-dzip = { git = "https://github.com/LambdaEd1th/dzip-core.git", tag = "v0.5.1" }
+dzip = { git = "https://github.com/LambdaEd1th/dzip-archive.git", tag = "v0.5.1" }
 ```
 
 ## Read an archive
