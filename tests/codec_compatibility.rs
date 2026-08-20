@@ -151,7 +151,7 @@ fn reference_dzip_exe_extracts_new_zlib_and_lzma_streams() {
         .unwrap()
         .as_nanos();
     let root = std::env::temp_dir().join(format!(
-        "dzip-rs-reference-codecs-{}-{unique}",
+        "dzip-archive-reference-codecs-{}-{unique}",
         std::process::id()
     ));
     std::fs::create_dir_all(&root).unwrap();
@@ -197,7 +197,7 @@ fn reference_combined_flags_preserve_registered_order_and_dz_asymmetry() {
         .unwrap()
         .as_nanos();
     let root = std::env::temp_dir().join(format!(
-        "dzip-rs-reference-combined-flags-{}-{unique}",
+        "dzip-archive-reference-combined-flags-{}-{unique}",
         std::process::id()
     ));
     std::fs::create_dir_all(&root).unwrap();
@@ -289,7 +289,7 @@ fn reference_codec_matrices_are_bidirectionally_compatible() {
         .unwrap()
         .as_nanos();
     let root = std::env::temp_dir().join(format!(
-        "dzip-rs-reference-codec-matrices-{}-{unique}",
+        "dzip-archive-reference-codec-matrices-{}-{unique}",
         std::process::id()
     ));
     std::fs::create_dir_all(&root).unwrap();

@@ -84,7 +84,7 @@ impl VolumeSource for FileSystemVolumeManager {
         // ID 0 is reserved for the main file, which is typically handled by the DzipReader itself
         // before calling into VolumeSource for other chunks. However, if open_volume IS called with 0,
         // it implies the caller expects the manager to handle it.
-        // In dzip-rs, VolumeSource is used for "Auxiliary" volumes.
+        // In dzip-archive, VolumeSource is used for "Auxiliary" volumes.
         // The DzipReader usually manages the main reader.
         if id == 0 {
             return Err(DzipError::Io(std::io::Error::other(
