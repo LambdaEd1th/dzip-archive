@@ -2,10 +2,10 @@ use alloc::format;
 use alloc::vec;
 use alloc::vec::Vec;
 
-use crate::Error;
-use crate::bitstream::{BitReader, BitWriter};
-use crate::checksum::adler32;
-use crate::matchfinder::{find_match, insert_position};
+use crate::codecs::zlib::Error;
+use crate::codecs::zlib::bitstream::{BitReader, BitWriter};
+use crate::codecs::zlib::checksum::adler32;
+use crate::codecs::zlib::matchfinder::{find_match, insert_position};
 
 const MAX_BITS: usize = 15;
 const INVALID_ENTRY: u32 = u32::MAX;

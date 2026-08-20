@@ -1,7 +1,7 @@
 use alloc::vec::Vec;
 
-use crate::options::{encode_workspace, model_workspace};
-use crate::{DecoderOptions, EncoderOptions, Error};
+use crate::codecs::lzma::options::{encode_workspace, model_workspace};
+use crate::codecs::lzma::{DecoderOptions, EncoderOptions, Error};
 
 #[derive(Debug)]
 pub struct Encoder {
@@ -24,8 +24,11 @@ impl Encoder {
             .ok_or_else(|| Error::workspace_limit("LZMA workspace estimate overflow"))?;
         check_workspace(workspace, self.options.limits.max_workspace_size)?;
         let output = core::mem::take(&mut self.output);
-        self.output =
-            crate::engine::encode_checked_with_buffer(input, &self.options.properties, output)?;
+        self.output = crate::codecs::lzma::engine::encode_checked_with_buffer(
+            input,
+            &self.options.properties,
+            output,
+        )?;
         check_output(self.output.len(), self.options.limits.max_output_size)?;
         Ok(&self.output)
     }
@@ -68,7 +71,7 @@ impl Decoder {
         check_input(input.len(), self.options.limits.max_input_size)?;
         let properties = self.options.properties.decoder_properties()?;
         let output = core::mem::take(&mut self.output);
-        self.output = crate::engine::decode_raw_with_buffer(
+        self.output = crate::codecs::lzma::engine::decode_raw_with_buffer(
             input,
             &properties,
             self.options.expected_size,
@@ -124,7 +127,7 @@ fn check_workspace(actual: usize, limit: usize) -> Result<(), Error> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{ErrorKind, LzmaProps, ResourceLimits};
+    use crate::codecs::lzma::{ErrorKind, LzmaProps, ResourceLimits};
 
     #[test]
     fn reusable_api_and_limits() {

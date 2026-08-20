@@ -1,5 +1,7 @@
 use super::{Codec, CodecError, CodecLimits};
 use crate::Result;
+#[cfg(feature = "zlib")]
+use crate::codecs::zlib;
 const GZIP_HEADER: [u8; 10] = [
     0x1f, 0x8b, 8, 0, // magic, deflate, no optional fields
     0, 0, 0, 0, // timestamp

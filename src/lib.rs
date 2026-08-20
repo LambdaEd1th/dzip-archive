@@ -20,7 +20,7 @@
 //! # let _ = data;
 //! # Ok::<(), dzip::DzipError>(())
 //! ```
-//!
+
 //! # Creating an archive
 //!
 //! ```no_run
@@ -36,11 +36,16 @@
 //! # Ok::<(), dzip::DzipError>(())
 //! ```
 
+#![forbid(unsafe_code)]
+
+extern crate alloc;
+
 #[cfg(feature = "decode")]
 pub mod archive;
 #[cfg(feature = "encode")]
 pub mod builder;
 pub mod codec;
+mod codecs;
 mod compat;
 pub mod error;
 #[cfg(feature = "decode")]

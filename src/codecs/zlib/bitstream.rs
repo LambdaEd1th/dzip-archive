@@ -1,6 +1,6 @@
 use alloc::vec::Vec;
 
-use crate::Error;
+use crate::codecs::zlib::Error;
 
 pub(super) struct BitReader<'a> {
     input: &'a [u8],

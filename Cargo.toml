@@ -1,35 +1,39 @@
 [package]
 name = "dzip"
-version.workspace = true
-edition.workspace = true
-repository.workspace = true
-license.workspace = true
-publish.workspace = true
+version = "0.5.0"
+edition = "2024"
+rust-version = "1.85"
+repository = "https://github.com/LambdaEd1th/dzip-core"
+license = "AGPL-3.0-or-later"
+publish = false
 description = "Pure Rust library for reading, extracting, creating, and inspecting Dzip archives"
-readme = "../../README.md"
+readme = "README.md"
 keywords = ["archive", "compression", "dzip", "gamedev"]
 categories = ["compression", "encoding"]
 
 [dependencies]
 byteorder = "1.5"
-bzip = { workspace = true, optional = true }
-dz = { workspace = true, optional = true }
-lzma = { workspace = true, optional = true }
 rayon = { version = "1.12", optional = true }
-serde = { workspace = true, optional = true }
-zlib = { workspace = true, optional = true }
+serde = { version = "1", features = ["derive"], optional = true }
 
 [features]
 default = ["encode", "decode", "all-codecs"]
 encode = []
 decode = []
 all-codecs = ["bzip", "dz", "lzma", "zlib"]
-bzip = ["dep:bzip"]
-dz = ["dep:dz"]
-lzma = ["dep:lzma"]
-zlib = ["dep:zlib"]
+bzip = []
+dz = []
+lzma = []
+zlib = []
 parallel = ["dep:rayon"]
 serde = ["dep:serde"]
 
 [dev-dependencies]
 sha2 = "0.11"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
+opt-level = 3

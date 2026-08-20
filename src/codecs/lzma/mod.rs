@@ -1,15 +1,8 @@
-//! Safe, dependency-free LZMA1 range coder.
+//! Internal safe, dependency-free LZMA1 range coder.
 //!
-//! The crate is always `no_std` and requires only `alloc`. It operates on raw
+//! The implementation requires only `alloc`. It operates on raw
 //! LZMA1 payloads; the LZMA-alone length header used by Dzip belongs to the
 //! `dzip` crate.
-
-#![no_std]
-
-extern crate alloc;
-
-#[cfg(test)]
-extern crate std;
 
 mod codec;
 mod engine;
@@ -18,8 +11,11 @@ mod matchfinder;
 mod options;
 mod range;
 
+#[allow(unused_imports)]
 pub use codec::{Decoder, Encoder, decode, encode};
+#[allow(unused_imports)]
 pub use error::{Error, ErrorKind};
+#[allow(unused_imports)]
 pub use options::{DecoderOptions, EncoderOptions, LzmaProps, ResourceLimits};
 
 use alloc::vec::Vec;

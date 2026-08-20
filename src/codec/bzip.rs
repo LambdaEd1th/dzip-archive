@@ -1,5 +1,7 @@
 use super::{Codec, CodecError, CodecLimits};
 use crate::Result;
+#[cfg(feature = "bzip")]
+use crate::codecs::bzip;
 
 /// Writes a standard BZip2 stream using 100-KiB blocks, as expected by dzip.
 pub(crate) fn encode(input: &[u8]) -> Result<Vec<u8>> {

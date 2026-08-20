@@ -14,7 +14,7 @@ use std::process::Command;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 fn fixture_root() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../test_data/native")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("test_data/native")
 }
 
 fn corpus(name: &str) -> Vec<u8> {
@@ -145,7 +145,7 @@ fn truncated_and_corrupted_payloads_are_rejected() {
 #[cfg(all(windows, target_arch = "x86_64"))]
 #[test]
 fn reference_dzip_exe_extracts_new_zlib_and_lzma_streams() {
-    let reference = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../reference/dzip/dzip.exe");
+    let reference = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("reference/dzip/dzip.exe");
     let unique = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
@@ -191,7 +191,7 @@ fn reference_dzip_exe_extracts_new_zlib_and_lzma_streams() {
 #[cfg(all(windows, target_arch = "x86_64"))]
 #[test]
 fn reference_combined_flags_preserve_registered_order_and_dz_asymmetry() {
-    let reference = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../reference/dzip/dzip.exe");
+    let reference = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("reference/dzip/dzip.exe");
     let unique = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()
@@ -283,7 +283,7 @@ fn reference_combined_flags_preserve_registered_order_and_dz_asymmetry() {
 #[cfg(all(windows, target_arch = "x86_64"))]
 #[test]
 fn reference_codec_matrices_are_bidirectionally_compatible() {
-    let reference = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../reference/dzip/dzip.exe");
+    let reference = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("reference/dzip/dzip.exe");
     let unique = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap()

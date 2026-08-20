@@ -13,7 +13,7 @@ pub use crate::writer::DzipWriter;
 /// Direct access to the native DZ engine for format-analysis tools.
 #[cfg(feature = "dz")]
 pub mod dz {
-    pub use ::dz::*;
+    pub use crate::codecs::dz::*;
 }
 
 #[cfg(feature = "encode")]

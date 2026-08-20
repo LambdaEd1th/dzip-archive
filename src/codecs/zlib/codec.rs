@@ -1,7 +1,7 @@
 use alloc::vec::Vec;
 
-use crate::options::{decode_workspace, encode_workspace};
-use crate::{DecoderOptions, EncoderOptions, Error, StreamFormat};
+use crate::codecs::zlib::options::{decode_workspace, encode_workspace};
+use crate::codecs::zlib::{DecoderOptions, EncoderOptions, Error, StreamFormat};
 
 #[derive(Debug)]
 pub struct Encoder {
@@ -24,8 +24,12 @@ impl Encoder {
         check_workspace(workspace, self.options.limits.max_workspace_size)?;
         let output = core::mem::take(&mut self.output);
         self.output = match self.options.format {
-            StreamFormat::RawDeflate => crate::engine::encode_raw_with_buffer(input, output),
-            StreamFormat::Zlib => crate::engine::encode_zlib_with_buffer(input, output),
+            StreamFormat::RawDeflate => {
+                crate::codecs::zlib::engine::encode_raw_with_buffer(input, output)
+            }
+            StreamFormat::Zlib => {
+                crate::codecs::zlib::engine::encode_zlib_with_buffer(input, output)
+            }
         };
         check_output(self.output.len(), self.options.limits.max_output_size)?;
         Ok(&self.output)
@@ -66,12 +70,16 @@ impl Decoder {
         check_input(input.len(), self.options.limits.max_input_size)?;
         let output = core::mem::take(&mut self.output);
         self.output = match self.options.format {
-            StreamFormat::RawDeflate => {
-                crate::engine::decode_raw_with_buffer(input, self.options.expected_size, output)?
-            }
-            StreamFormat::Zlib => {
-                crate::engine::decode_zlib_with_buffer(input, self.options.expected_size, output)?
-            }
+            StreamFormat::RawDeflate => crate::codecs::zlib::engine::decode_raw_with_buffer(
+                input,
+                self.options.expected_size,
+                output,
+            )?,
+            StreamFormat::Zlib => crate::codecs::zlib::engine::decode_zlib_with_buffer(
+                input,
+                self.options.expected_size,
+                output,
+            )?,
         };
         Ok(&self.output)
     }
@@ -125,7 +133,7 @@ fn check_workspace(actual: usize, limit: usize) -> Result<(), Error> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{ErrorKind, ResourceLimits};
+    use crate::codecs::zlib::{ErrorKind, ResourceLimits};
 
     #[test]
     fn formats_reusable_api_and_limits() {

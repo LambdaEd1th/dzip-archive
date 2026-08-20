@@ -1,6 +1,9 @@
 use std::fmt;
 use std::io;
 
+#[cfg(feature = "dz")]
+use crate::codecs::dz;
+
 #[non_exhaustive]
 #[derive(Debug)]
 pub enum DzipError {

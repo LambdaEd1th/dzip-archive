@@ -1,4 +1,4 @@
-use crate::Error;
+use crate::codecs::bzip::Error;
 
 /// Input, output, and temporary-memory ceilings for a codec operation.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

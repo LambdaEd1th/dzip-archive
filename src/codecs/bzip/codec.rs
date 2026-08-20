@@ -1,7 +1,7 @@
 use alloc::vec::Vec;
 
-use crate::options::encode_workspace;
-use crate::{DecoderOptions, EncoderOptions, Error};
+use crate::codecs::bzip::options::encode_workspace;
+use crate::codecs::bzip::{DecoderOptions, EncoderOptions, Error};
 
 #[derive(Debug)]
 pub struct Encoder {
@@ -23,7 +23,11 @@ impl Encoder {
             .ok_or_else(|| Error::workspace_limit("BZip2 workspace estimate overflow"))?;
         check_workspace(workspace, self.options.limits.max_workspace_size)?;
         let output = core::mem::take(&mut self.output);
-        self.output = crate::engine::encode_with_buffer(input, self.options.block_size, output)?;
+        self.output = crate::codecs::bzip::engine::encode_with_buffer(
+            input,
+            self.options.block_size,
+            output,
+        )?;
         check_output(self.output.len(), self.options.limits.max_output_size)?;
         Ok(&self.output)
     }
@@ -61,7 +65,7 @@ impl Decoder {
     pub fn decode<'a>(&'a mut self, input: &[u8]) -> Result<&'a [u8], Error> {
         check_input(input.len(), self.options.limits.max_input_size)?;
         let output = core::mem::take(&mut self.output);
-        self.output = crate::engine::decode_with_buffer(
+        self.output = crate::codecs::bzip::engine::decode_with_buffer(
             input,
             self.options.expected_size,
             output,
@@ -117,7 +121,7 @@ fn check_workspace(actual: usize, limit: usize) -> Result<(), Error> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{ErrorKind, ResourceLimits};
+    use crate::codecs::bzip::{ErrorKind, ResourceLimits};
 
     #[test]
     fn reusable_api_and_limits() {
@@ -180,7 +184,7 @@ mod tests {
         let mut decoder = Decoder::new(DecoderOptions {
             expected_size: 11,
             limits: ResourceLimits {
-                max_workspace_size: crate::options::decode_workspace(1).unwrap(),
+                max_workspace_size: crate::codecs::bzip::options::decode_workspace(1).unwrap(),
                 ..ResourceLimits::UNLIMITED
             },
         })

@@ -1,4 +1,4 @@
-use crate::{DzError, Result};
+use crate::codecs::dz::{DzError, Result};
 use alloc::format;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

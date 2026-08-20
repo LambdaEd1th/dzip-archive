@@ -1,7 +1,9 @@
 use super::common::{CommonReference, CommonRoot, CommonSegment, CommonSelection};
-use crate::chunk::encode_recent_distance;
-use crate::matchfinder::{LazyLzParser, LzDecision, MatchCost, MatchScoring, common_match_hash};
-use crate::{DzipError, RangeSettings, Result};
+use crate::codecs::dz::chunk::encode_recent_distance;
+use crate::codecs::dz::matchfinder::{
+    LazyLzParser, LzDecision, MatchCost, MatchScoring, common_match_hash,
+};
+use crate::codecs::dz::{DzipError, RangeSettings, Result};
 use alloc::collections::BTreeMap;
 use alloc::string::ToString;
 use alloc::vec;

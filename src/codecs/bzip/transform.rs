@@ -1,7 +1,7 @@
 use alloc::vec;
 use alloc::vec::Vec;
 
-use crate::Error;
+use crate::codecs::bzip::Error;
 
 const RUNA: usize = 0;
 const RUNB: usize = 1;
@@ -11,8 +11,8 @@ pub(super) fn derandomize(bytes: &mut [u8]) {
     let mut index = 0usize;
     for byte in bytes {
         if remaining == 0 {
-            remaining = crate::randtable::BZ2_RNUMS[index];
-            index = (index + 1) % crate::randtable::BZ2_RNUMS.len();
+            remaining = crate::codecs::bzip::randtable::BZ2_RNUMS[index];
+            index = (index + 1) % crate::codecs::bzip::randtable::BZ2_RNUMS.len();
         }
         remaining -= 1;
         if remaining == 1 {

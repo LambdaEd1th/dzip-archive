@@ -6,6 +6,8 @@
 
 use super::{Codec, CodecError, CodecLimits};
 use crate::Result;
+#[cfg(feature = "lzma")]
+use crate::codecs::lzma;
 use lzma::{LzmaProps, decoder_props, encode_with_end_marker};
 
 pub(crate) fn encode(input: &[u8]) -> Result<Vec<u8>> {

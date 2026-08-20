@@ -1,4 +1,4 @@
-use crate::{DzCommonBuffer, DzError, RangeSettings, Result};
+use crate::codecs::dz::{DzCommonBuffer, DzError, RangeSettings, Result};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct ResourceLimits {

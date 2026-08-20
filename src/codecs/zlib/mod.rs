@@ -1,14 +1,7 @@
-//! Safe, dependency-free RFC 1951 DEFLATE and RFC 1950 zlib codec.
+//! Internal safe, dependency-free RFC 1951 DEFLATE and RFC 1950 zlib codec.
 //!
-//! The crate is always `no_std` and requires only `alloc`. Dzip's unusual
+//! The implementation requires only `alloc`. Dzip's unusual
 //! gzip-without-trailer framing intentionally remains in the `dzip` crate.
-
-#![no_std]
-
-extern crate alloc;
-
-#[cfg(test)]
-extern crate std;
 
 mod bitstream;
 mod checksum;
@@ -18,8 +11,11 @@ mod error;
 mod matchfinder;
 mod options;
 
+#[allow(unused_imports)]
 pub use codec::{Decoder, Encoder, decode, encode};
+#[allow(unused_imports)]
 pub use error::{Error, ErrorKind};
+#[allow(unused_imports)]
 pub use options::{DecoderOptions, EncoderOptions, ResourceLimits, StreamFormat};
 
 use alloc::vec::Vec;

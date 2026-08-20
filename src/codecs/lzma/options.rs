@@ -1,4 +1,4 @@
-use crate::Error;
+use crate::codecs::lzma::Error;
 
 const MIN_DICTIONARY_SIZE: u32 = 1 << 12;
 

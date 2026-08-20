@@ -1,12 +1,5 @@
 //! Native Dzip range/LZ and archive-wide common-buffer codec.
 
-#![no_std]
-
-extern crate alloc;
-
-#[cfg(test)]
-extern crate std;
-
 mod archive;
 mod chunk;
 mod codec;
@@ -18,10 +11,15 @@ mod range;
 mod settings;
 
 pub use archive::common::DzCommonBuffer;
+#[allow(unused_imports)]
 pub use archive::{DzEncoderOptions, EncodedDzArchive, compress_archive, compress_archive_slices};
+#[allow(unused_imports)]
 pub use chunk::{compress_chunk, decompress_chunk, decompress_chunk_with_common_buffer};
+#[allow(unused_imports)]
 pub use codec::{Decoder, Encoder, decode, encode};
+#[allow(unused_imports)]
 pub use error::{DzError, ErrorKind, Result};
+#[allow(unused_imports)]
 pub use options::{DecoderOptions, EncoderOptions, ResourceLimits, model_workspace_size};
 pub use settings::RangeSettings;
 

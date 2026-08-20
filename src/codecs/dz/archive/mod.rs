@@ -6,9 +6,9 @@ use self::common::{
     DzCommonBuffer, ResolvedReference, build_common_static_prefix, compress_common_segment,
     validate_common_settings,
 };
-use crate::chunk::{compress_chunk, compress_chunk_with_references};
-use crate::model::{CommonModels, DzFixedCosts};
-use crate::{DzipError, RangeSettings, Result};
+use crate::codecs::dz::chunk::{compress_chunk, compress_chunk_with_references};
+use crate::codecs::dz::model::{CommonModels, DzFixedCosts};
+use crate::codecs::dz::{DzipError, RangeSettings, Result};
 use alloc::collections::BTreeSet;
 use alloc::string::ToString;
 use alloc::vec::Vec;

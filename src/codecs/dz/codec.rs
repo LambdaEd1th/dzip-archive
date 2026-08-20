@@ -1,7 +1,7 @@
 use alloc::vec::Vec;
 
-use crate::options::{encode_workspace_size, model_workspace_size};
-use crate::{DecoderOptions, DzError, EncoderOptions, Result};
+use crate::codecs::dz::options::{encode_workspace_size, model_workspace_size};
+use crate::codecs::dz::{DecoderOptions, DzError, EncoderOptions, Result};
 
 #[derive(Debug)]
 pub struct Encoder {
@@ -23,8 +23,11 @@ impl Encoder {
         let workspace = encode_workspace_size(input.len(), self.options.settings)?;
         check_workspace(workspace, self.options.limits.max_workspace_size)?;
         let output = core::mem::take(&mut self.output);
-        self.output =
-            crate::chunk::compress_chunk_with_output(input, self.options.settings, output)?;
+        self.output = crate::codecs::dz::chunk::compress_chunk_with_output(
+            input,
+            self.options.settings,
+            output,
+        )?;
         check_output(self.output.len(), self.options.limits.max_output_size)?;
         Ok(&self.output)
     }
@@ -65,7 +68,7 @@ impl<'a> Decoder<'a> {
     pub fn decode<'b>(&'b mut self, input: &[u8]) -> Result<&'b [u8]> {
         check_input(input.len(), self.options.limits.max_input_size)?;
         let output = core::mem::take(&mut self.output);
-        self.output = crate::chunk::decompress_chunk_with_output(
+        self.output = crate::codecs::dz::chunk::decompress_chunk_with_output(
             input,
             self.options.expected_size,
             self.options.settings,
@@ -122,13 +125,13 @@ fn check_workspace(actual: usize, limit: usize) -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{ErrorKind, RangeSettings, ResourceLimits};
+    use crate::codecs::dz::{ErrorKind, RangeSettings, ResourceLimits};
 
     #[test]
     fn reusable_api_preserves_stream_bytes_and_enforces_limits() {
         let input = b"DZ facade".repeat(200);
         let settings = RangeSettings::default();
-        let expected = crate::compress_chunk(&input, settings).unwrap();
+        let expected = crate::codecs::dz::compress_chunk(&input, settings).unwrap();
         let mut encoder = Encoder::new(EncoderOptions::default()).unwrap();
         assert_eq!(encoder.encode(&input).unwrap(), expected);
 

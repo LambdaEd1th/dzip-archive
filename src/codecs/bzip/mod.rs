@@ -1,15 +1,8 @@
-//! Safe, dependency-free BZip2 encoder and decoder.
+//! Internal safe, dependency-free BZip2 encoder and decoder.
 //!
-//! The crate is always `no_std` and requires only `alloc`. [`Encoder`] and
+//! The implementation requires only `alloc`. [`Encoder`] and
 //! [`Decoder`] retain their output allocations across calls; the free
 //! functions are convenient one-shot wrappers.
-
-#![no_std]
-
-extern crate alloc;
-
-#[cfg(test)]
-extern crate std;
 
 mod bitstream;
 mod checksum;
@@ -20,8 +13,11 @@ mod options;
 mod randtable;
 mod transform;
 
+#[allow(unused_imports)]
 pub use codec::{Decoder, Encoder, decode, encode};
+#[allow(unused_imports)]
 pub use error::{Error, ErrorKind};
+#[allow(unused_imports)]
 pub use options::{DecoderOptions, EncoderOptions, ResourceLimits};
 
 use alloc::vec::Vec;

@@ -1,6 +1,6 @@
 use alloc::vec::Vec;
 
-use crate::Error;
+use crate::codecs::bzip::Error;
 
 pub(super) struct BitWriter {
     output: Vec<u8>,

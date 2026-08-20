@@ -7,7 +7,7 @@ use std::path::{Path, PathBuf};
 
 #[test]
 fn decodes_native_dzip_original_codec_fixture() {
-    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../test_data/native");
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("test_data/native");
     let corpus = root.join("corpus");
     let main_path = root.join("codecs.dz");
 

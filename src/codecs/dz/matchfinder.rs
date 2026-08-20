@@ -1,6 +1,6 @@
-use crate::model::DzFixedCosts;
-use crate::range::AdaptiveModel;
-use crate::{DzipError, MAX_MATCH, MIN_MATCH, Result};
+use crate::codecs::dz::model::DzFixedCosts;
+use crate::codecs::dz::range::AdaptiveModel;
+use crate::codecs::dz::{DzipError, MAX_MATCH, MIN_MATCH, Result};
 use alloc::collections::{BTreeMap, BTreeSet, VecDeque};
 use alloc::string::ToString;
 use alloc::vec::Vec;

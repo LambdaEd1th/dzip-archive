@@ -1,4 +1,4 @@
-use crate::{DzError as DzipError, Result};
+use crate::codecs::dz::{DzError as DzipError, Result};
 use alloc::string::ToString;
 use alloc::vec::Vec;
 use alloc::{format, vec};

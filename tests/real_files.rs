@@ -7,7 +7,7 @@ use std::fs::File;
 use std::path::PathBuf;
 
 fn fixture_root() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../test_data/native")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("test_data/native")
 }
 
 fn inspect_archive(

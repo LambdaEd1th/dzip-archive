@@ -4,6 +4,8 @@
 use super::CodecLimits;
 #[cfg(all(not(feature = "dz"), feature = "encode"))]
 use super::{Codec, CodecError};
+#[cfg(feature = "dz")]
+use crate::codecs::dz;
 use crate::{RangeSettings, Result};
 
 #[cfg(feature = "dz")]

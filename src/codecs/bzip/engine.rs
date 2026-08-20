@@ -2,11 +2,13 @@ use alloc::format;
 use alloc::vec;
 use alloc::vec::Vec;
 
-use crate::Error;
-use crate::bitstream::{BitReader, BitWriter};
-use crate::checksum::crc32;
-use crate::options::decode_workspace;
-use crate::transform::{bwt, decode_rle1, derandomize, encode_rle1, inverse_bwt, mtf_rle2};
+use crate::codecs::bzip::Error;
+use crate::codecs::bzip::bitstream::{BitReader, BitWriter};
+use crate::codecs::bzip::checksum::crc32;
+use crate::codecs::bzip::options::decode_workspace;
+use crate::codecs::bzip::transform::{
+    bwt, decode_rle1, derandomize, encode_rle1, inverse_bwt, mtf_rle2,
+};
 
 const BLOCK_MAGIC: u64 = 0x3141_5926_5359;
 const STREAM_END_MAGIC: u64 = 0x1772_4538_5090;

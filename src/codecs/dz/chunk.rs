@@ -1,8 +1,10 @@
-use crate::archive::common::{DzCommonBuffer, ResolvedReference, validate_common_settings};
-use crate::matchfinder::{LazyLzParser, LzDecision, MatchCost, MatchScoring};
-use crate::model::{CommonModels, DzFixedCosts, DzFrequencyCounts, DzModels};
-use crate::range::{AdaptiveModel, RangeDecoder, RangeEncoder};
-use crate::{DzipError, END_SYMBOL, MIN_MATCH, RangeSettings, Result};
+use crate::codecs::dz::archive::common::{
+    DzCommonBuffer, ResolvedReference, validate_common_settings,
+};
+use crate::codecs::dz::matchfinder::{LazyLzParser, LzDecision, MatchCost, MatchScoring};
+use crate::codecs::dz::model::{CommonModels, DzFixedCosts, DzFrequencyCounts, DzModels};
+use crate::codecs::dz::range::{AdaptiveModel, RangeDecoder, RangeEncoder};
+use crate::codecs::dz::{DzipError, END_SYMBOL, MIN_MATCH, RangeSettings, Result};
 use alloc::format;
 use alloc::string::ToString;
 use alloc::vec::Vec;

@@ -1,8 +1,10 @@
-use crate::chunk::{decode_common_payload, encode_grouped, encode_recent_distance};
-use crate::matchfinder::{LazyLzParser, LzDecision, MatchCost, MatchScoring, local_match_key};
-use crate::model::{CommonFrequencies, CommonModels, DzFixedCosts};
-use crate::range::RangeEncoder;
-use crate::{DzipError, END_SYMBOL, MIN_MATCH, RangeSettings, Result};
+use crate::codecs::dz::chunk::{decode_common_payload, encode_grouped, encode_recent_distance};
+use crate::codecs::dz::matchfinder::{
+    LazyLzParser, LzDecision, MatchCost, MatchScoring, local_match_key,
+};
+use crate::codecs::dz::model::{CommonFrequencies, CommonModels, DzFixedCosts};
+use crate::codecs::dz::range::RangeEncoder;
+use crate::codecs::dz::{DzipError, END_SYMBOL, MIN_MATCH, RangeSettings, Result};
 use alloc::collections::BTreeSet;
 use alloc::format;
 use alloc::string::ToString;

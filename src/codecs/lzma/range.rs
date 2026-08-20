@@ -1,6 +1,6 @@
 use alloc::vec::Vec;
 
-use crate::Error;
+use crate::codecs::lzma::Error;
 
 const PROB_TOTAL: u32 = 1 << 11;
 const MOVE_BITS: u32 = 5;

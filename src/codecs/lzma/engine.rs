@@ -1,11 +1,11 @@
 use alloc::vec;
 use alloc::vec::Vec;
 
-use crate::matchfinder::{
+use crate::codecs::lzma::matchfinder::{
     find_match, insert_position as insert_match_position, match_length as match_length_at,
 };
-use crate::range::{RangeDecoder, RangeEncoder};
-use crate::{Error, LzmaProps};
+use crate::codecs::lzma::range::{RangeDecoder, RangeEncoder};
+use crate::codecs::lzma::{Error, LzmaProps};
 
 const PROB_TOTAL: u32 = 1 << 11;
 const NUM_STATES: usize = 12;
