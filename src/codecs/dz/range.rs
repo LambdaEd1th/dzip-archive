@@ -158,6 +158,10 @@ impl AdaptiveModel {
         sum
     }
 
+    // Keep the bit-twiddling form compatible with stable compilers that predate
+    // `usize::isolate_lowest_one`.
+    #[allow(unknown_lints)]
+    #[allow(clippy::manual_isolate_lowest_one)]
     fn add_fenwick(&mut self, symbol: usize, amount: u32) {
         let mut index = symbol + 1;
         while index < self.fenwick.len() {
