@@ -50,18 +50,14 @@ pub(super) fn decode_rle1(input: &[u8], limit: usize) -> Result<Vec<u8>, Error> 
         while run < 4 && position + run < input.len() && input[position + run] == byte {
             run += 1;
         }
-        let encoded_width;
-        let decoded_run;
-        if run == 4 {
+        let (encoded_width, decoded_run) = if run == 4 {
             let extra = *input
                 .get(position + 4)
                 .ok_or_else(|| Error::new("truncated BZip2 RLE1 run"))?;
-            encoded_width = 5;
-            decoded_run = 4 + usize::from(extra);
+            (5, 4 + usize::from(extra))
         } else {
-            encoded_width = run;
-            decoded_run = run;
-        }
+            (run, run)
+        };
         if output.len().saturating_add(decoded_run) > limit {
             return Err(Error::new("BZip2 RLE1 output exceeds declared length"));
         }

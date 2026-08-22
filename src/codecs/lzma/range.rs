@@ -49,17 +49,16 @@ impl<'a> RangeDecoder<'a> {
 
     pub(super) fn decode_bit(&mut self, probability: &mut u16) -> Result<u32, Error> {
         let bound = (self.range >> 11) * u32::from(*probability);
-        let bit;
-        if self.code < bound {
+        let bit = if self.code < bound {
             self.range = bound;
             *probability += (PROB_TOTAL as u16 - *probability) >> MOVE_BITS;
-            bit = 0;
+            0
         } else {
             self.range -= bound;
             self.code -= bound;
             *probability -= *probability >> MOVE_BITS;
-            bit = 1;
-        }
+            1
+        };
         self.normalize()?;
         Ok(bit)
     }
